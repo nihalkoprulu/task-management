@@ -1,0 +1,38 @@
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  font-family: "Roboto", sans-serif;  
+  box-sizing: border-box;            
+  margin: 0;                         
+  padding: 0;                        
+  height: 100%;                      
+  background-color: #ffffff;
+  color: #333333;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;            
+}
+
+/* Custom scrollbar styling for Firefox */
+* {
+  scrollbar-width: thin;            
+  scrollbar-color: #222222 #959595; 
+}
+
+/* Custom scrollbar styling for Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 8px;                      
+}
+
+*::-webkit-scrollbar-track {
+  background: #ffffff;             
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #222222;       
+  border-radius: 20px;              
+}
