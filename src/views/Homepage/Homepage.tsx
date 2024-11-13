@@ -6,7 +6,8 @@ import {
 } from "./styled";
 import { themeColors } from "assets/theme/style";
 import { Button } from "@mui/material";
-import TaskFilterComponent from "components/TaskFilter";
+import TaskFilterComponent from "components/TaskFilterComponent";
+import TaskListComponent from "components/TaskListComponent";
 
 const Homepage: FC = () => {
   return (
@@ -29,6 +30,7 @@ const Homepage: FC = () => {
         </Button>
       </HomepageButtonWrapper>
       <TaskFilterComponent />
+      <TaskListComponent />
     </HomepageContainer>
   );
 };
