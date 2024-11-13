@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router";
 import routes from "routers/index.routes";
-import { AppWrapper } from "styled";
+import { AppBackground, AppContainer, AppWrapper } from "styled";
 require("assets/css/styles.css");
 
 const App = () => {
@@ -14,7 +14,10 @@ const App = () => {
     ));
   return (
     <AppWrapper data-testid="app-container">
-      <Routes>{renderRoutes()}</Routes>
+      <AppBackground></AppBackground>
+      <AppContainer>
+        <Routes>{renderRoutes()}</Routes>
+      </AppContainer>
     </AppWrapper>
   );
 };
