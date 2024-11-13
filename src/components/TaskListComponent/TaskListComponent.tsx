@@ -11,7 +11,7 @@ import TaskContext from "contexts/TaskContext";
 const TaskListComponent: FC = () => {
   const { tasks } = useContext(TaskContext);
 
-  const getPriorityColor = (priority: string) => {
+  const getPriorityColor = (priority: string | undefined) => {
     switch (priority) {
       case "High":
         return themeColors.chip.high;

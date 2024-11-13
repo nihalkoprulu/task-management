@@ -13,8 +13,4 @@ export const HomepageTitle = styled.h1`
   color: ${themeColors.white};
 `;
 
-export const HomepageButtonWrapper =  styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: flex-end;
-`;
+
