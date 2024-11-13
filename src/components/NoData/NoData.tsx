@@ -13,7 +13,7 @@ const NoData: FC = () => {
   };
 
   return (
-    <NoDataContainer>
+    <NoDataContainer data-testid="no-data-container">
       <p>
         Oops, no tasks here yet! <strong>"Add Task"</strong> to create a new
         one,

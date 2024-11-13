@@ -1,7 +1,5 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, screen, waitFor } from "@testing-library/react";
 import AddTaskComponent from "./AddTaskComponent";
-import { mockContextValue } from "lib/data/test/mockData";
-import TaskContext from "contexts/TaskContext/TaskContext";
 import { renderComponent } from "helpers/renderComponents";
 
 describe("AddTaskComponent", () => {
@@ -13,11 +11,7 @@ describe("AddTaskComponent", () => {
   });
 
   it("opens the AddTaskDialog when the Add Task button is clicked", async () => {
-    render(
-      <TaskContext.Provider value={mockContextValue}>
-        <AddTaskComponent />
-      </TaskContext.Provider>
-    );
+    renderComponent(<AddTaskComponent />);
 
     const addTaskButton = screen.getByTestId("add-task-button");
     fireEvent.click(addTaskButton);

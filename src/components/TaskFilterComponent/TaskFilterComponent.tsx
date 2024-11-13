@@ -40,7 +40,10 @@ const TaskFilterComponent: FC<TaskFilterProps> = ({
         <InputBase
           sx={{ ml: 1, flex: 1 }}
           placeholder="Search by title or description"
-          inputProps={{ "aria-label": "search google maps" }}
+          inputProps={{
+            "aria-label": "search google maps",
+            "data-testid": "search-input",
+          }}
           value={searchTerm}
           onChange={handleSearchChange}
         />
