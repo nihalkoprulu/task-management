@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { FC, useState } from "react";
+import { FC, useContext, useState } from "react";
 import { PrioritySelect, SearchBar, TaskFilter } from "./styled";
 import {
   IconButton,
@@ -10,15 +10,29 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import TaskFilterContext from "contexts/TaskFilterContext/TaskFilterContext";
+interface TaskFilterProps {
+  searchTerm: string;
+  setSearchTerm: (searchTerm: string) => void;
+}
 
-const TaskFilterComponent: FC = () => {
-  const [filter, setFilter] = useState<string>("");
-
-  const updateFilter: (event: SelectChangeEvent) => void = (event) => {
-    setFilter(event.target.value);
-  };
+const TaskFilterComponent: FC<TaskFilterProps> = ({
+  searchTerm,
+  setSearchTerm,
+}) => {
+  const { priorityFilter, setPriorityFilter } = useContext(TaskFilterContext);
 
   const priorityOptions: string[] = ["", "Low", "Medium", "High"];
+
+  const handleSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void = (
+    e
+  ) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const handleSearchClick: () => void = () => {
+    console.log("Search term: ", searchTerm); // Or trigger search logic here if needed
+  };
 
   return (
     <TaskFilter data-testid="task-filter">
@@ -27,9 +41,11 @@ const TaskFilterComponent: FC = () => {
           sx={{ ml: 1, flex: 1 }}
           placeholder="Search by title or description"
           inputProps={{ "aria-label": "search google maps" }}
+          value={searchTerm}
+          onChange={handleSearchChange}
         />
         <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
-          <SearchIcon />
+          <SearchIcon onClick={handleSearchClick} />
         </IconButton>
       </SearchBar>
       <PrioritySelect>
@@ -37,9 +53,11 @@ const TaskFilterComponent: FC = () => {
         <Select
           labelId="select-priority-helper-label"
           id="select-priority-helper"
-          value={filter}
+          value={priorityFilter}
           label="Priority"
-          onChange={updateFilter}
+          onChange={(event: SelectChangeEvent<string>) =>
+            setPriorityFilter(event.target.value)
+          }
         >
           {priorityOptions.map((priority) => (
             <MenuItem key={priority} value={priority}>

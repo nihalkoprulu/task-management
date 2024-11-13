@@ -1,19 +1,16 @@
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import AlertDialog from "./AlertDialog";
-import TaskContext from "contexts/TaskContext";
-import { mockContextValue } from "lib/data/test/mockData";
+import { renderComponent } from "helpers/renderComponents";
 
 test("renders Alert Dialog", () => {
-  render(
-    <TaskContext.Provider value={mockContextValue}>
-      <AlertDialog
-        title="Test Title"
-        description="Test Description"
-        open={true}
-        clickHandler={jest.fn()}
-        clickSecondHandler={jest.fn()}
-      />
-    </TaskContext.Provider>
+  renderComponent(
+    <AlertDialog
+      title="Test Title"
+      description="Test Description"
+      open={true}
+      clickHandler={jest.fn()}
+      clickSecondHandler={jest.fn()}
+    />
   );
 
   const Container: HTMLElement = screen.getByTestId(

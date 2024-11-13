@@ -5,7 +5,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import DialogView from "components/dialogs/DialogView";
 import TaskDialog from "components/TaskDialog";
 import AlertDialog from "components/dialogs/AlertDialog";
-import TaskContext from "contexts/TaskContext";
+import TaskContext from "contexts/TaskContext/TaskContext";
 
 export interface TaskMenuProps {
   taskId: number;

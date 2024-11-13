@@ -1,15 +1,12 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import AddTaskComponent from "./AddTaskComponent";
-import TaskContext from "contexts/TaskContext";
 import { mockContextValue } from "lib/data/test/mockData";
+import TaskContext from "contexts/TaskContext/TaskContext";
+import { renderComponent } from "helpers/renderComponents";
 
 describe("AddTaskComponent", () => {
   it("renders the Add Task button", () => {
-    render(
-      <TaskContext.Provider value={mockContextValue}>
-        <AddTaskComponent />
-      </TaskContext.Provider>
-    );
+    renderComponent(<AddTaskComponent />);
 
     const addTaskButton = screen.getByText(/Add Task/i);
     expect(addTaskButton).toBeInTheDocument();

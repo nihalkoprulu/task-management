@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { FC, useContext, useState } from "react";
-import TaskContext from "contexts/TaskContext";
+import { FC, useState } from "react";
 import { Button } from "@mui/material";
 import { themeColors } from "assets/theme/style";
 import { AddTask } from "./styled";
@@ -8,7 +7,6 @@ import DialogView from "components/dialogs/DialogView";
 import AddTaskDialog from "components/TaskDialog";
 
 const AddTaskComponent: FC = () => {
-  const { tasks } = useContext(TaskContext);
   const [showAddTaskDialog, setShowAddTaskDialog] = useState<boolean>(false);
 
   return (

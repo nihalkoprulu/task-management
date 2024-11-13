@@ -1,15 +1,35 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { FC, useContext, useState } from "react";
+import { FC, useContext } from "react";
 import { ChipStyled, TaskItem, TaskList, TaskMenuContainer } from "./styled";
 import { Masonry } from "@mui/lab";
 import { themeColors } from "assets/theme/style";
 import TaskMenu from "components/TaskMenu";
 import { truncateText } from "helpers/truncateText";
 import { Divider } from "@mui/material";
-import TaskContext from "contexts/TaskContext";
+import TaskContext from "contexts/TaskContext/TaskContext";
+import TaskFilterContext from "contexts/TaskFilterContext/TaskFilterContext";
+import { ITaskType } from "utils/interfaces/task/task.interface";
 
-const TaskListComponent: FC = () => {
+interface TaskListProps {
+  searchTerm: string;
+}
+
+const TaskListComponent: FC<TaskListProps> = ({ searchTerm }) => {
   const { tasks } = useContext(TaskContext);
+  const { priorityFilter } = useContext(TaskFilterContext);
+
+  const filteredTasks: ITaskType[] = tasks.filter((task) => {
+    const matchesPriority: boolean = priorityFilter
+      ? task.priority === priorityFilter
+      : true;
+    const matchesSearchTerm: boolean =
+      searchTerm.length > 3
+        ? task.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          task.description.toLowerCase().includes(searchTerm.toLowerCase())
+        : true;
+
+    return matchesPriority && matchesSearchTerm;
+  });
 
   const getPriorityColor = (priority: string | undefined) => {
     switch (priority) {
@@ -27,7 +47,7 @@ const TaskListComponent: FC = () => {
   return (
     <TaskList data-testid="task-list-container">
       <Masonry columns={{ xs: 1, sm: 2, md: 3, lg: 4 }} spacing={2}>
-        {tasks.map((task) => (
+        {filteredTasks.map((task) => (
           <TaskItem key={task.id}>
             <TaskMenuContainer>
               <TaskMenu

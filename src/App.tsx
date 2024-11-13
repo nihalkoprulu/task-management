@@ -1,4 +1,4 @@
-import TaskContextProvider from "contexts/TaskContextProvider";
+import TaskContextCombinedProvider from "contexts/TaskContextCombinedProvider";
 import { Route, Routes } from "react-router";
 import routes from "routers/index.routes";
 import { AppBackground, AppContainer, AppWrapper } from "styled";
@@ -14,14 +14,14 @@ const App = () => {
       />
     ));
   return (
-    <TaskContextProvider>
+    <TaskContextCombinedProvider>
       <AppWrapper data-testid="app-container">
         <AppBackground></AppBackground>
         <AppContainer>
           <Routes>{renderRoutes()}</Routes>
         </AppContainer>
       </AppWrapper>
-    </TaskContextProvider>
+    </TaskContextCombinedProvider>
   );
 };
 export default App;

@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import { themeColors } from "assets/theme/style";
 import { ITaskType } from "utils/interfaces/task/task.interface";
-import TaskContext from "contexts/TaskContext";
+import TaskContext from "contexts/TaskContext/TaskContext";
 
 interface TaskDialogProps {
   clickHandler: () => void;

@@ -2,7 +2,7 @@ import { FC, useContext } from "react";
 import { NoDataContainer } from "./styled";
 import { Button } from "@mui/material";
 import { themeColors } from "assets/theme/style";
-import TaskContext from "contexts/TaskContext";
+import TaskContext from "contexts/TaskContext/TaskContext";
 import { initialData } from "lib/data/initialData";
 
 const NoData: FC = () => {

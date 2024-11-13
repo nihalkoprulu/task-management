@@ -1,7 +1,6 @@
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import TaskDialog from "./TaskDialog";
-import TaskContext from "contexts/TaskContext";
-import { mockContextValue } from "lib/data/test/mockData";
+import { renderComponent } from "helpers/renderComponents";
 
 const mockAddTask = jest.fn();
 const mockClickHandler = jest.fn();
@@ -13,11 +12,7 @@ describe("TaskDialog", () => {
   });
 
   it("renders the dialog with correct fields", () => {
-    render(
-      <TaskContext.Provider value={mockContextValue}>
-        <TaskDialog clickHandler={mockClickHandler} />
-      </TaskContext.Provider>
-    );
+    renderComponent(<TaskDialog clickHandler={mockClickHandler} />);
 
     expect(screen.getByText(/Add a new task/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Title/i)).toBeInTheDocument();
