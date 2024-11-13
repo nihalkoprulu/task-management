@@ -1,67 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { FC, useState } from "react";
+import { FC, useContext, useState } from "react";
 import { ChipStyled, TaskItem, TaskList, TaskMenuContainer } from "./styled";
 import { Masonry } from "@mui/lab";
-import { ITaskType } from "utils/interfaces/task/task.interface";
 import { themeColors } from "assets/theme/style";
 import TaskMenu from "components/TaskMenu";
 import { truncateText } from "helpers/truncateText";
 import { Divider } from "@mui/material";
+import TaskContext from "contexts/TaskContext";
 
 const TaskListComponent: FC = () => {
-  const [tasks, setTasks] = useState<ITaskType[]>([
-    {
-      id: 1,
-      title: "Neque porro quisquam est qui dolorem ipsum quia",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id metus lacinia, hendrerit nibh et, tincidunt ex. Sed mollis mi a mi euismod, nec ullamcorper dolor dictum. In a nisl faucibus, scelerisque tortor semper, ullamcorper enim. Nulla sed purus eget elit imperdiet ultricies id vitae ex.",
-      priority: "Medium",
-    },
-    {
-      id: 2,
-      title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      priority: "High",
-    },
-    {
-      id: 3,
-      title: "Lorem Ipsum 3",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      priority: "Low",
-    },
-    {
-      id: 4,
-      title: "Lorem Ipsum 4",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      priority: "Low",
-    },
-    {
-      id: 5,
-      title: "Lorem Ipsum 5",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      priority: "High",
-    },
-    {
-      id: 6,
-      title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      description: "",
-      priority: "High",
-    },
-    {
-      id: 7,
-      title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      description: "",
-      priority: "High",
-    },
-    {
-      id: 8,
-      title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      description: "",
-      priority: "High",
-    },
-  ]);
+  const { tasks } = useContext(TaskContext);
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {

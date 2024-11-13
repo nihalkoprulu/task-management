@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useContext } from "react";
 import {
   HomepageButtonWrapper,
   HomepageContainer,
@@ -8,8 +8,23 @@ import { themeColors } from "assets/theme/style";
 import { Button } from "@mui/material";
 import TaskFilterComponent from "components/TaskFilterComponent";
 import TaskListComponent from "components/TaskListComponent";
+import TaskContext from "contexts/TaskContext";
+import NoData from "components/NoData";
 
 const Homepage: FC = () => {
+  const { tasks } = useContext(TaskContext);
+
+  const renderView: () => JSX.Element = () => {
+    return tasks.length > 0 ? (
+      <>
+        <TaskFilterComponent />
+        <TaskListComponent />
+      </>
+    ) : (
+      <NoData />
+    );
+  };
+
   return (
     <HomepageContainer data-testid="homepage-container">
       <HomepageTitle>Task Tracker</HomepageTitle>
@@ -29,8 +44,7 @@ const Homepage: FC = () => {
           Add Task
         </Button>
       </HomepageButtonWrapper>
-      <TaskFilterComponent />
-      <TaskListComponent />
+      {renderView()}
     </HomepageContainer>
   );
 };
