@@ -49,7 +49,7 @@ const TaskDialog: FC<TaskDialogProps> = ({ clickHandler, taskId }) => {
     }
   }, [taskId]);
 
-  const getMaxId = () => {
+  const getMaxId: () => number = () => {
     if (tasks.length === 0) return 0;
     return Math.max(...tasks.map((task) => task.id));
   };
@@ -61,7 +61,7 @@ const TaskDialog: FC<TaskDialogProps> = ({ clickHandler, taskId }) => {
     }));
   };
 
-  const handleAddTask = () => {
+  const handleAddTask: () => void = () => {
     const newTask: ITaskType = {
       ...taskData,
       id: taskId ? taskData.id : getMaxId() + 1,

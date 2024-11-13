@@ -8,11 +8,10 @@ import {
   TaskList,
   TaskMenuContainer,
 } from "./styled";
-import { Masonry } from "@mui/lab";
 import { themeColors } from "assets/theme/style";
 import TaskMenu from "components/TaskMenu";
 import { truncateText } from "helpers/truncateText";
-import { Divider, Grid } from "@mui/material";
+import { Divider } from "@mui/material";
 import TaskContext from "contexts/TaskContext/TaskContext";
 import TaskFilterContext from "contexts/TaskFilterContext/TaskFilterContext";
 import { ITaskType } from "utils/interfaces/task/task.interface";
@@ -38,7 +37,9 @@ const TaskListComponent: FC<TaskListProps> = ({ searchTerm }) => {
     return matchesPriority && matchesSearchTerm;
   });
 
-  const getPriorityColor = (priority: string | undefined) => {
+  const getPriorityColor: (priority: string | undefined) => string = (
+    priority
+  ) => {
     switch (priority) {
       case "High":
         return themeColors.chip.high;

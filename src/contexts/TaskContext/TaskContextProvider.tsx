@@ -1,14 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import TaskContext from "./TaskContext";
 import { ITaskType } from "utils/interfaces/task/task.interface";
 
 const TaskContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [tasks, setTasks] = React.useState<ITaskType[]>(() => {
+  const [tasks, setTasks] = useState<ITaskType[]>(() => {
     const savedTasks = localStorage.getItem("tasks");
     return savedTasks ? JSON.parse(savedTasks) : [];
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
