@@ -7,9 +7,15 @@ type TaskContextType = {
   loadInitialTask: (tasks: ITaskType[]) => void;
   addTask: (task: ITaskType) => void;
   editTask: (task: ITaskType) => void;
+  deleteTask:(id: number) => void;
 };
 
-const defaultContextValue: TaskContextType = { tasks: [], loadInitialTask: () => {}, addTask: () => {}, editTask: () => {} };
+const defaultContextValue: TaskContextType = { 
+  tasks: [], 
+  loadInitialTask: () => {}, 
+  addTask: () => {}, 
+  editTask: () => {}, 
+  deleteTask: () => {} };
 
 const TaskContext = React.createContext<TaskContextType>(defaultContextValue);
 

@@ -24,9 +24,13 @@ const TaskContextProvider = ({ children }: { children: ReactNode }) => {
       prev.map((task) => (task.id === updatedTask.id ? updatedTask : task))
     );
   };
+  const deleteTask = (id: number) =>
+    setTasks((prev) => prev.filter((task) => task.id !== id));
 
   return (
-    <TaskContext.Provider value={{ tasks, addTask, loadInitialTask, editTask }}>
+    <TaskContext.Provider
+      value={{ tasks, addTask, loadInitialTask, editTask, deleteTask }}
+    >
       {children}
     </TaskContext.Provider>
   );

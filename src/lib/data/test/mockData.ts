@@ -5,4 +5,5 @@ export const mockContextValue = {
   loadInitialTask: mockAddTask,
   addTask: mockAddTask,
   editTask: mockAddTask,
+  deleteTask: mockAddTask,
 };
