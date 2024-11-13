@@ -1,5 +1,5 @@
 
-import { Box, Chip, Paper } from '@mui/material';
+import { Box, Chip, Grid, Paper } from '@mui/material';
 import { themeColors } from 'assets/theme/style';
 import { fontSizes, fontWeights, typography } from 'assets/theme/typography';
 import styled from 'styled-components';
@@ -12,6 +12,10 @@ export const TaskList = styled(Box)`
   display: flex;
   justify-content: center;
 `;
+
+export const TaskItemGroup = styled(Grid)``;
+
+export const TaskItemWrapper = styled(Grid)``;
 
 export const TaskItem = styled(Paper)`
   display: flex;

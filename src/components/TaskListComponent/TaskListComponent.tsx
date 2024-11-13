@@ -1,11 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { FC, useContext } from "react";
-import { ChipStyled, TaskItem, TaskList, TaskMenuContainer } from "./styled";
+import {
+  ChipStyled,
+  TaskItem,
+  TaskItemGroup,
+  TaskItemWrapper,
+  TaskList,
+  TaskMenuContainer,
+} from "./styled";
 import { Masonry } from "@mui/lab";
 import { themeColors } from "assets/theme/style";
 import TaskMenu from "components/TaskMenu";
 import { truncateText } from "helpers/truncateText";
-import { Divider } from "@mui/material";
+import { Divider, Grid } from "@mui/material";
 import TaskContext from "contexts/TaskContext/TaskContext";
 import TaskFilterContext from "contexts/TaskFilterContext/TaskFilterContext";
 import { ITaskType } from "utils/interfaces/task/task.interface";
@@ -46,25 +53,27 @@ const TaskListComponent: FC<TaskListProps> = ({ searchTerm }) => {
 
   return (
     <TaskList data-testid="task-list-container">
-      <Masonry columns={{ xs: 1, sm: 2, md: 3, lg: 4 }} spacing={2}>
+      <TaskItemGroup container spacing={2}>
         {filteredTasks.map((task) => (
-          <TaskItem key={task.id}>
-            <TaskMenuContainer>
-              <TaskMenu
-                taskId={task.id}
-                clickHandler={() => console.log(task.id)}
+          <TaskItemWrapper item xs={12} sm={6} md={4} lg={3} key={task.id}>
+            <TaskItem key={task.id}>
+              <TaskMenuContainer>
+                <TaskMenu
+                  taskId={task.id}
+                  clickHandler={() => console.log(task.id)}
+                />
+              </TaskMenuContainer>
+              <ChipStyled
+                bgColor={getPriorityColor(task.priority)}
+                label={task.priority}
               />
-            </TaskMenuContainer>
-            <ChipStyled
-              bgColor={getPriorityColor(task.priority)}
-              label={task.priority}
-            />
-            <Divider />
-            <h4>{task.title}</h4>
-            <p>{truncateText(task.description, 200)}</p>
-          </TaskItem>
+              <Divider />
+              <h4>{task.title}</h4>
+              <p>{truncateText(task.description, 200)}</p>
+            </TaskItem>
+          </TaskItemWrapper>
         ))}
-      </Masonry>
+      </TaskItemGroup>
     </TaskList>
   );
 };

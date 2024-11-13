@@ -29,6 +29,7 @@ export const themeColors = {
 };
 
 
+
 const breakpoints = {
   xs: '480px',    // Extra small devices (portrait phones)
   sm: '768px',    // Small devices (landscape phones, small tablets)
@@ -36,6 +37,8 @@ const breakpoints = {
   lg: '1280px',   // Large devices (laptops, small desktops)
   xl: '1440px',   // Extra large devices (desktops, large screens)
 };
+
+export const maxWidth = breakpoints.xl;
 
 // Create media queries using the breakpoints
 export const devices = {

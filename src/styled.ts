@@ -1,4 +1,4 @@
-import { themeColors } from 'assets/theme/style';
+import { maxWidth, themeColors } from 'assets/theme/style';
 import styled from 'styled-components';
 import backgroundImg from 'assets/images/background.png';
 
@@ -10,6 +10,9 @@ export const AppWrapper = styled.div`
 export const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
+  max-width: ${maxWidth};
+  margin: 0 auto;
   flex: 1;
   z-index: 1;
 `;

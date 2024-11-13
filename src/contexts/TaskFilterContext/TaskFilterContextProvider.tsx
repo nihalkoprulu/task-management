@@ -12,12 +12,8 @@ const TaskFilterContextProvider = ({
   });
 
   useEffect(() => {
-    if (priorityFilter) {
-      localStorage.setItem("priorityFilter", priorityFilter);
-    }
+    localStorage.setItem("priorityFilter", priorityFilter);
   }, [priorityFilter]);
-
-  console.log("priorityFilter", priorityFilter);
 
   return (
     <TaskFilterContext.Provider value={{ priorityFilter, setPriorityFilter }}>

@@ -26,7 +26,12 @@ interface TaskDialogProps {
 const TaskDialog: FC<TaskDialogProps> = ({ clickHandler, taskId }) => {
   const { tasks, addTask, editTask } = useContext(TaskContext);
 
-  const [taskData, setTaskData] = useState<ITaskType | null>(null);
+  const [taskData, setTaskData] = useState<ITaskType>({
+    id: taskId || 0,
+    title: "",
+    description: "",
+    priority: undefined,
+  });
 
   useEffect(() => {
     if (taskId) {
@@ -34,33 +39,36 @@ const TaskDialog: FC<TaskDialogProps> = ({ clickHandler, taskId }) => {
       if (taskToEdit) {
         setTaskData(taskToEdit);
       }
+    } else {
+      setTaskData({
+        id: getMaxId() + 1,
+        title: "",
+        description: "",
+        priority: undefined,
+      });
     }
-  }, []);
+  }, [taskId]);
 
-  // Find the max ID from tasks
   const getMaxId = () => {
     if (tasks.length === 0) return 0;
     return Math.max(...tasks.map((task) => task.id));
   };
 
   const handleChange: (key: string, value: string) => void = (key, value) => {
-    taskData &&
-      setTaskData({
-        ...taskData,
-        [key]: value,
-      });
+    setTaskData((prevData) => ({
+      ...prevData,
+      [key]: value,
+    }));
   };
 
   const handleAddTask = () => {
     const newTask: ITaskType = {
-      id: taskId ? taskData?.id || 0 : getMaxId() + 1,
-      title: taskData?.title || "",
-      description: taskData?.description || "",
-      priority: taskData?.priority,
+      ...taskData,
+      id: taskId ? taskData.id : getMaxId() + 1,
     };
 
     taskId ? editTask(newTask) : addTask(newTask);
-    clickHandler(); // Close dialog
+    clickHandler();
   };
 
   return (
@@ -71,7 +79,7 @@ const TaskDialog: FC<TaskDialogProps> = ({ clickHandler, taskId }) => {
           id="outlined-basic"
           label="Title"
           variant="outlined"
-          value={taskData?.title || ""}
+          value={taskData.title}
           onChange={(event) => handleChange("title", event.target.value)}
         />
         <TextField
@@ -80,7 +88,7 @@ const TaskDialog: FC<TaskDialogProps> = ({ clickHandler, taskId }) => {
           variant="outlined"
           multiline
           rows={4}
-          value={taskData?.description || ""}
+          value={taskData.description}
           onChange={(event) => handleChange("description", event.target.value)}
         />
         <PrioritySelect>
@@ -89,7 +97,7 @@ const TaskDialog: FC<TaskDialogProps> = ({ clickHandler, taskId }) => {
             labelId="priority-select-label"
             id="priority-select"
             name="priority"
-            value={taskData?.priority || ""}
+            value={taskData.priority || ""}
             onChange={(event) => handleChange("priority", event.target.value)}
           >
             <MenuItem value="Low">Low</MenuItem>
@@ -100,7 +108,7 @@ const TaskDialog: FC<TaskDialogProps> = ({ clickHandler, taskId }) => {
       </TaskDialogContentContainer>
       <DialogActions>
         <Button
-          onClick={() => clickHandler()}
+          onClick={clickHandler}
           variant="outlined"
           sx={{
             backgroundColor: themeColors.white,
