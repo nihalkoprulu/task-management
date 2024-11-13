@@ -5,7 +5,7 @@ import { Button } from "@mui/material";
 import { themeColors } from "assets/theme/style";
 import { AddTask } from "./styled";
 import DialogView from "components/dialogs/DialogView";
-import AddTaskDialog from "components/AddTaskDialog";
+import AddTaskDialog from "components/TaskDialog";
 
 const AddTaskComponent: FC = () => {
   const { tasks } = useContext(TaskContext);

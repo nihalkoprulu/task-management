@@ -1,14 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import AlertDialog from "./AlertDialog";
 import TaskContext from "contexts/TaskContext";
-
-const mockAddTask = jest.fn();
-
-const mockContextValue = {
-  tasks: [],
-  loadInitialTask: mockAddTask,
-  addTask: mockAddTask,
-};
+import { mockContextValue } from "lib/data/test/mockData";
 
 test("renders Alert Dialog", () => {
   render(

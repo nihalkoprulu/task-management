@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Container from '@mui/material/Container';
 import { FormControl } from '@mui/material';
 
-export const AddTaskDialogContainer = styled(Container)`
+export const TaskDialogContainer = styled(Container)`
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -15,7 +15,7 @@ export const PrioritySelect = styled(FormControl)`
   width: 100%;
 `;
 
-export const AddTaskDialogContentContainer = styled.div`
+export const TaskDialogContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;

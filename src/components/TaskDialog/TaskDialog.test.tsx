@@ -1,17 +1,12 @@
 import { render, screen } from "@testing-library/react";
-import AddTaskDialog from "./AddTaskDialog";
+import TaskDialog from "./TaskDialog";
 import TaskContext from "contexts/TaskContext";
+import { mockContextValue } from "lib/data/test/mockData";
 
 const mockAddTask = jest.fn();
 const mockClickHandler = jest.fn();
 
-const mockContextValue = {
-  tasks: [],
-  loadInitialTask: mockAddTask,
-  addTask: mockAddTask,
-};
-
-describe("AddTaskDialog", () => {
+describe("TaskDialog", () => {
   beforeEach(() => {
     mockAddTask.mockClear();
     mockClickHandler.mockClear();
@@ -20,7 +15,7 @@ describe("AddTaskDialog", () => {
   it("renders the dialog with correct fields", () => {
     render(
       <TaskContext.Provider value={mockContextValue}>
-        <AddTaskDialog clickHandler={mockClickHandler} />
+        <TaskDialog clickHandler={mockClickHandler} />
       </TaskContext.Provider>
     );
 

@@ -1,7 +1,9 @@
 import { FC, MouseEvent, useState } from "react";
 import { TaskMenuContainer, TaskMenuWrapper } from "./styled";
-import { Box, IconButton, Menu, MenuItem } from "@mui/material";
+import { IconButton, Menu, MenuItem } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import DialogView from "components/dialogs/DialogView";
+import TaskDialog from "components/TaskDialog";
 
 export interface TaskMenuProps {
   taskId: number;
@@ -9,6 +11,7 @@ export interface TaskMenuProps {
 }
 
 const TaskMenu: FC<TaskMenuProps> = ({ taskId, clickHandler }) => {
+  const [showEditTaskDialog, setShowEditTaskDialog] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -68,9 +71,19 @@ const TaskMenu: FC<TaskMenuProps> = ({ taskId, clickHandler }) => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={() => clickHandler()}>Edit</MenuItem>
+        <MenuItem onClick={() => setShowEditTaskDialog(true)}>Edit</MenuItem>
         <MenuItem onClick={() => clickHandler()}>Delete</MenuItem>
       </Menu>
+      <DialogView
+        open={showEditTaskDialog}
+        clickHandler={() => setShowEditTaskDialog(!showEditTaskDialog)}
+        dialogContent={
+          <TaskDialog
+            clickHandler={() => setShowEditTaskDialog(!showEditTaskDialog)}
+            taskId={taskId}
+          />
+        }
+      />
     </TaskMenuWrapper>
   );
 };

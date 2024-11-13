@@ -1,14 +1,7 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import AddTaskComponent from "./AddTaskComponent";
 import TaskContext from "contexts/TaskContext";
-
-const mockAddTask = jest.fn();
-
-const mockContextValue = {
-  tasks: [],
-  loadInitialTask: mockAddTask,
-  addTask: mockAddTask,
-};
+import { mockContextValue } from "lib/data/test/mockData";
 
 describe("AddTaskComponent", () => {
   it("renders the Add Task button", () => {

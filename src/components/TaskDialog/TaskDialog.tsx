@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { FC, useContext, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import {
-  AddTaskDialogContainer,
-  AddTaskDialogContentContainer,
   PrioritySelect,
+  TaskDialogContainer,
+  TaskDialogContentContainer,
 } from "./styled";
 import {
   Button,
@@ -12,26 +12,30 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  SelectChangeEvent,
   TextField,
 } from "@mui/material";
 import { themeColors } from "assets/theme/style";
 import { ITaskType } from "utils/interfaces/task/task.interface";
 import TaskContext from "contexts/TaskContext";
 
-interface AddTaskDialogProps {
+interface TaskDialogProps {
   clickHandler: () => void;
+  taskId?: number;
 }
 
-const AddTaskDialog: FC<AddTaskDialogProps> = ({ clickHandler }) => {
-  const { tasks, addTask } = useContext(TaskContext);
+const TaskDialog: FC<TaskDialogProps> = ({ clickHandler, taskId }) => {
+  const { tasks, addTask, editTask } = useContext(TaskContext);
 
-  const [taskData, setTaskData] = useState<ITaskType>({
-    id: 0,
-    title: "",
-    description: "",
-    priority: undefined,
-  });
+  const [taskData, setTaskData] = useState<ITaskType | null>(null);
+
+  useEffect(() => {
+    if (taskId) {
+      const taskToEdit = tasks.find((task) => task.id === taskId);
+      if (taskToEdit) {
+        setTaskData(taskToEdit);
+      }
+    }
+  }, []);
 
   // Find the max ID from tasks
   const getMaxId = () => {
@@ -40,34 +44,34 @@ const AddTaskDialog: FC<AddTaskDialogProps> = ({ clickHandler }) => {
   };
 
   const handleChange: (key: string, value: string) => void = (key, value) => {
-    setTaskData({
-      ...taskData,
-      [key]: value,
-    });
+    taskData &&
+      setTaskData({
+        ...taskData,
+        [key]: value,
+      });
   };
 
   const handleAddTask = () => {
     const newTask: ITaskType = {
-      id: getMaxId() + 1,
-      title: taskData.title,
-      description: taskData.description,
-      priority: taskData.priority,
+      id: taskId ? taskData?.id || 0 : getMaxId() + 1,
+      title: taskData?.title || "",
+      description: taskData?.description || "",
+      priority: taskData?.priority,
     };
 
-    addTask(newTask);
-    setTaskData({ id: 0, title: "", description: "", priority: undefined }); // Reset form
+    taskId ? editTask(newTask) : addTask(newTask);
     clickHandler(); // Close dialog
   };
 
   return (
-    <AddTaskDialogContainer data-testid="add-task-dialog-container">
-      <DialogTitle>Add a new task</DialogTitle>
-      <AddTaskDialogContentContainer>
+    <TaskDialogContainer data-testid="add-task-dialog-container">
+      <DialogTitle>{taskId ? "Edit Task Details" : "Add New Task"}</DialogTitle>
+      <TaskDialogContentContainer>
         <TextField
           id="outlined-basic"
           label="Title"
           variant="outlined"
-          value={taskData.title}
+          value={taskData?.title || ""}
           onChange={(event) => handleChange("title", event.target.value)}
         />
         <TextField
@@ -76,7 +80,7 @@ const AddTaskDialog: FC<AddTaskDialogProps> = ({ clickHandler }) => {
           variant="outlined"
           multiline
           rows={4}
-          value={taskData.description}
+          value={taskData?.description || ""}
           onChange={(event) => handleChange("description", event.target.value)}
         />
         <PrioritySelect>
@@ -85,7 +89,7 @@ const AddTaskDialog: FC<AddTaskDialogProps> = ({ clickHandler }) => {
             labelId="priority-select-label"
             id="priority-select"
             name="priority"
-            value={taskData.priority || ""}
+            value={taskData?.priority || ""}
             onChange={(event) => handleChange("priority", event.target.value)}
           >
             <MenuItem value="Low">Low</MenuItem>
@@ -93,7 +97,7 @@ const AddTaskDialog: FC<AddTaskDialogProps> = ({ clickHandler }) => {
             <MenuItem value="High">High</MenuItem>
           </Select>
         </PrioritySelect>
-      </AddTaskDialogContentContainer>
+      </TaskDialogContentContainer>
       <DialogActions>
         <Button
           onClick={() => clickHandler()}
@@ -122,11 +126,11 @@ const AddTaskDialog: FC<AddTaskDialogProps> = ({ clickHandler }) => {
           }}
           onClick={handleAddTask}
         >
-          Add Task
+          {taskId ? "Update Task" : "Add Task"}
         </Button>
       </DialogActions>
-    </AddTaskDialogContainer>
+    </TaskDialogContainer>
   );
 };
 
-export default AddTaskDialog;
+export default TaskDialog;
