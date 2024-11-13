@@ -1,11 +1,8 @@
 import { screen, fireEvent } from "@testing-library/react";
 import { renderComponent } from "helpers/renderComponents";
 import Homepage from "./Homepage";
-import userEvent from "@testing-library/user-event";
 
 describe("Homepage", () => {
-  const mockSetSearchTerm = jest.fn();
-
   it('renders "NoData" when there are no tasks', () => {
     renderComponent(<Homepage />, "noData");
 
