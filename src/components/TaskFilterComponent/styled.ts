@@ -1,7 +1,6 @@
 
 import styled from 'styled-components';
 import { devices, themeColors } from 'assets/theme/style';
-import { FormControl } from '@mui/material';
 
 export const TaskFilter= styled.div`
   display: flex;
@@ -18,27 +17,3 @@ export const TaskFilter= styled.div`
     padding: 16px;
   }
 `; 
-   
-export const SearchBar = styled.div`
-  display: flex;
-  width: 100%;
-  background-color: ${themeColors.white};
-  justify-content: space-between;
-  align-items: center;
-  border: 1px solid rgb(51, 51, 51, 0.3);
-  border-radius: 4px;
-  padding: 5px 14px;
-
-  &:hover{
-    border: 1px solid rgb(51, 51, 51);
-  }
-`; 
-
-export const PrioritySelect = styled(FormControl)`
-  width: 200px;
-  background-color: ${themeColors.white};
-  
-  @media ${devices.sm} {
-    width: 100%;
-  }
-`;

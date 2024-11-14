@@ -3,7 +3,7 @@ import { FC, useState } from "react";
 import { Button } from "@mui/material";
 import { themeColors } from "assets/theme/style";
 import { AddTask } from "./styled";
-import DialogView from "components/dialogs/DialogView";
+import DialogView from "components/common/dialogs/DialogView";
 import AddTaskDialog from "components/TaskDialog";
 
 const AddTaskComponent: FC = () => {

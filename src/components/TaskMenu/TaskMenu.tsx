@@ -2,9 +2,9 @@ import { FC, MouseEvent, useContext, useState } from "react";
 import { TaskMenuContainer, TaskMenuWrapper } from "./styled";
 import { IconButton, Menu, MenuItem } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import DialogView from "components/dialogs/DialogView";
+import DialogView from "components/common/dialogs/DialogView";
 import TaskDialog from "components/TaskDialog";
-import AlertDialog from "components/dialogs/AlertDialog";
+import AlertDialog from "components/common/dialogs/AlertDialog";
 import TaskContext from "contexts/TaskContext/TaskContext";
 
 export interface TaskMenuProps {
