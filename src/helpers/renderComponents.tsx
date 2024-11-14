@@ -1,18 +1,13 @@
 import { render, RenderResult } from "@testing-library/react";
-import { mockNoData, mockData } from "lib/data/test/mockData";
 import TaskContext from "contexts/TaskContext/TaskContext";
-
-type RenderOptions = "noData" | "withData";
+import { mockData } from "lib/data/test/mockData";
 
 export const renderComponent = (
   component: JSX.Element,
-  option: RenderOptions = "withData"
+  values?: any
 ): RenderResult => {
-  const contextValue = option === "noData" ? mockNoData : mockData;
-
+  const value = values || mockData;
   return render(
-    <TaskContext.Provider value={contextValue}>
-      {component}
-    </TaskContext.Provider>
+    <TaskContext.Provider value={value}>{component}</TaskContext.Provider>
   );
 };

@@ -9,13 +9,16 @@ const PriorityFilterComponent: FC = () => {
   const priorityOptions: string[] = ["", "Low", "Medium", "High"];
 
   return (
-    <PrioritySelect data-testid="priority-select">
+    <PrioritySelect>
       <InputLabel id="select-priority-label">Priority</InputLabel>
       <Select
         labelId="select-priority-helper-label"
         id="select-priority-helper"
         value={priorityFilter}
         label="Priority"
+        inputProps={{
+          "data-testid": "select-priority",
+        }}
         onChange={(event: SelectChangeEvent<string>) =>
           setPriorityFilter(event.target.value)
         }

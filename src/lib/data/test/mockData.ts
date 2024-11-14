@@ -1,19 +1,27 @@
 import { initialData } from "../initialData";
 
-const mockAddTask = jest.fn();
+const mockTask = jest.fn();
 
 export const mockNoData = {
   tasks: [],
-  loadInitialTask: mockAddTask,
-  addTask: mockAddTask,
-  editTask: mockAddTask,
-  deleteTask: mockAddTask,
+  loadInitialTask: mockTask,
+  addTask: mockTask,
+  editTask: mockTask,
+  deleteTask: mockTask,
 };
 
 export const mockData = {
   tasks: initialData,
-  loadInitialTask: mockAddTask,
-  addTask: mockAddTask,
-  editTask: mockAddTask,
-  deleteTask: mockAddTask,
+  loadInitialTask: mockTask,
+  addTask: mockTask,
+  editTask: mockTask,
+  deleteTask: mockTask,
+};
+
+export const mockFilterData = {
+  priorityFilter: "",
+  searchTerm: "",
+  filteredTasks: initialData,
+  setPriorityFilter: mockTask,
+  setSearchTerm: mockTask
 };

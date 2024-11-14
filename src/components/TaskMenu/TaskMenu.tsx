@@ -31,13 +31,14 @@ const TaskMenu: FC<TaskMenuProps> = ({ taskId }) => {
   };
 
   return (
-    <TaskMenuWrapper>
+    <TaskMenuWrapper data-testid="task-menu-container">
       <TaskMenuContainer>
         <IconButton
           onClick={handleClick}
           size="small"
           sx={{ ml: 2 }}
-          aria-controls={open ? "account-menu" : undefined}
+          data-testid="task-menu-button"
+          aria-controls={open ? "task-menu" : undefined}
           aria-haspopup="true"
           aria-expanded={open ? "true" : undefined}
         >
@@ -46,7 +47,7 @@ const TaskMenu: FC<TaskMenuProps> = ({ taskId }) => {
       </TaskMenuContainer>
       <Menu
         anchorEl={anchorEl}
-        id="customer-item-menu"
+        id="task-item-menu"
         open={open}
         onClose={handleClose}
         onClick={handleClose}

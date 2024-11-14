@@ -15,7 +15,7 @@ const SearchBarComponent: FC = () => {
   };
 
   return (
-    <SearchBar data-testid="task-filter">
+    <SearchBar>
       <InputBase
         sx={{ ml: 1, flex: 1 }}
         placeholder="Search by title or description"
