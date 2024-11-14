@@ -39,10 +39,7 @@ const TaskListComponent: FC = () => {
           <TaskItemWrapper item xs={12} sm={6} md={4} lg={3} key={task.id}>
             <TaskItem key={task.id}>
               <TaskMenuContainer>
-                <TaskMenu
-                  taskId={task.id}
-                  clickHandler={() => console.log(task.id)}
-                />
+                <TaskMenu taskId={task.id} />
               </TaskMenuContainer>
               <ChipStyled
                 bgColor={getPriorityColor(task.priority)}

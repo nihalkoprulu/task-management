@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { FC, useContext, useState } from "react";
+import { FC, useContext } from "react";
 import { PrioritySelect, SearchBar, TaskFilter } from "./styled";
 import {
   IconButton,
@@ -24,10 +24,6 @@ const TaskFilterComponent: FC = () => {
     setSearchTerm(e.target.value);
   };
 
-  const handleSearchClick: () => void = () => {
-    console.log("Search term: ", searchTerm); // Or trigger search logic here if needed
-  };
-
   return (
     <TaskFilter data-testid="task-filter">
       <SearchBar>
@@ -41,8 +37,8 @@ const TaskFilterComponent: FC = () => {
           value={searchTerm}
           onChange={handleSearchChange}
         />
-        <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
-          <SearchIcon onClick={handleSearchClick} />
+        <IconButton sx={{ p: "10px" }} aria-label="search">
+          <SearchIcon />
         </IconButton>
       </SearchBar>
       <PrioritySelect>

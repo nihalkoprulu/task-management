@@ -9,10 +9,9 @@ import TaskContext from "contexts/TaskContext/TaskContext";
 
 export interface TaskMenuProps {
   taskId: number;
-  clickHandler: (id?: number) => void;
 }
 
-const TaskMenu: FC<TaskMenuProps> = ({ taskId, clickHandler }) => {
+const TaskMenu: FC<TaskMenuProps> = ({ taskId }) => {
   const { deleteTask } = useContext(TaskContext);
   const [showEditTaskDialog, setShowEditTaskDialog] = useState<boolean>(false);
   const [showAlertDialog, setShowAlertDialog] = useState<boolean>(false);
