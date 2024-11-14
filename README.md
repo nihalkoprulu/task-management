@@ -1,46 +1,137 @@
-# Getting Started with Create React App
+### Task Management 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This task management app built with React, TypeScript, and Material UI to help users manage their tasks. It allows users to manage their tasks with features like adding, editing, deleting, filtering, searching.
 
-## Available Scripts
+#### Features
 
-In the project directory, you can run:
+Add, edit, and delete tasks.
 
-### `npm start`
+Filter tasks by priority.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Search tasks by title and description.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Built with a responsive design using Material UI.
 
-### `npm test`
+#### Run Locally
+##### 1-Clone the repository
+`git clone https://github.com/nihalkoprulu/task-management.git`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+##### 2-Navigate to the project folder
+`cd task-management`
 
-### `npm run build`
+##### 3-Install the dependencies:
+`npm install`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+##### 4-Run the development server:
+`npm start`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### Testing
+Testing is implemented using Jest and React Testing Library. To run the tests, use the following command:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+`npm test`
 
-### `npm run eject`
+#### Overview of The Task Management, Code Structure & State Management
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Overview of The Task Management
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+When you run the app, you will see the Dashboard. If there are no tasks yet, you can:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+`Load Sample Data:` Click the "Load Sample Data" button to load example tasks.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+`Add New Task:` Click the "Add Task" button to create a new task.
 
-## Learn More
+Once tasks are loaded (either from sample data or newly added tasks), they will appear in the list. If you load sample data, it will be saved to localStorage and stay there even if you refresh the page.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+When there is task data, you will also see:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+`Priority Dropdown:` You can filter tasks by their priority using the priority dropdown. When the priority option is changed, the priorityFilter in localStorage will be updated, and even after a page refresh, the selected option will be loaded from there, ensuring tasks are listed accordingly.
+
+`Search Bar:` You can search tasks by entering a keyword into the search bar. The search will look through both the title and description of each task. Filtered results will be displayed instantly.
+
+Both the priorityFilter and searchTerm are managed through FilterContext, and the filtered task list will always be shown based on your active filters. This ensures that tasks are consistently displayed according to your selected filters.
+
+**Edit or Delete Task**
+
+To edit or delete a task, click the three dots at the top right of the task card. When you select Edit from the menu, a dialog window will open, allowing you to update the task details.
+
+If you choose Delete, an alert dialog will appear to confirm the action. If confirmed, the task will be deleted.
+
+#### Code Structure
+
+`App.tsx`
+
+It renders core components and wraps the app in various context providers for state management.
+
+`components/`
+
+Contains all reusable UI components, such as common, any task-related components.
+
+`contexts/`
+
+Holds context files that manage and provide state to the components.
+
+`views/`
+
+Contains the main views that structure the app.
+
+`utils/`
+
+Contains utility functions and TypeScript interfaces.
+
+`assets/`
+
+Stores static assets, such as global styles, theme definitions, and images. This can include CSS or styled-components files, icons, and other design assets.
+
+`routers/`
+
+Manages routing for the app, defining the navigation structure and paths for each view.
+
+`helpers/`
+
+Holds helper functions that are used throughout the app. 
+
+`lib/`
+
+Contains mock data for testing and initial task data.
+
+
+#### State Management
+
+State is managed using Context API. There are two main contexts: TaskContext and FilterContext.
+
+**TaskContext**
+
+The TaskContext is responsible for managing all task-related data, including adding, updating, deleting tasks. It provides the task state.
+
+**State:**
+
+`tasks:` An array of task objects. Each task object includes properties such as id, title, description, priority.
+
+**Actions:**
+
+`addTask:` Adds a new task to the tasks array.
+
+`updateTask:` Updates an existing task by its ID.
+
+`deleteTask:` Removes a task by its ID.
+
+**TaskFilterContext**
+
+The FilterContext manages task filtering based on priority and search term, making it easy to apply and persist filters across components. It also stores the priority filter value in localStorage to ensure filters remain active even after a page reload.
+
+**State:**
+
+`priorityFilter:` The selected priority filter for tasks. It’s stored in the browser's localStorage. The value can be an empty string (no filter) or a string representing the selected priority ("high", "medium", "low").
+
+`searchTerm:` The term entered in the search bar to filter tasks by their title and description.
+
+`filteredTasks:` The list of tasks filtered based on the current priorityFilter and searchTerm. This list is automatically updated whenever these filters change, so any component using filteredTasks will always show the latest results.
+
+**Actions:**
+
+`setPriorityFilter:` Updates the current priority filter based on user selection. The new value is also saved to localStorage.
+
+`setSearchTerm:` Updates the search term entered by the user, allowing them to filter tasks based on keywords in the title or description.
+
+
+
