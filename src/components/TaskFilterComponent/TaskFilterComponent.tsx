@@ -11,16 +11,10 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import TaskFilterContext from "contexts/TaskFilterContext/TaskFilterContext";
-interface TaskFilterProps {
-  searchTerm: string;
-  setSearchTerm: (searchTerm: string) => void;
-}
 
-const TaskFilterComponent: FC<TaskFilterProps> = ({
-  searchTerm,
-  setSearchTerm,
-}) => {
+const TaskFilterComponent: FC = () => {
   const { priorityFilter, setPriorityFilter } = useContext(TaskFilterContext);
+  const { searchTerm, setSearchTerm } = useContext(TaskFilterContext);
 
   const priorityOptions: string[] = ["", "Low", "Medium", "High"];
 

@@ -1,4 +1,4 @@
-import { FC, useContext, useState } from "react";
+import { FC, useContext } from "react";
 import { HomepageContainer, HomepageTitle } from "./styled";
 import TaskFilterComponent from "components/TaskFilterComponent";
 import TaskListComponent from "components/TaskListComponent";
@@ -8,16 +8,12 @@ import TaskContext from "contexts/TaskContext/TaskContext";
 
 const Homepage: FC = () => {
   const { tasks } = useContext(TaskContext);
-  const [searchTerm, setSearchTerm] = useState<string>("");
 
   const renderView: () => JSX.Element = () => {
     return tasks.length > 0 ? (
       <>
-        <TaskFilterComponent
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-        />
-        <TaskListComponent searchTerm={searchTerm} />
+        <TaskFilterComponent />
+        <TaskListComponent />
       </>
     ) : (
       <NoData />

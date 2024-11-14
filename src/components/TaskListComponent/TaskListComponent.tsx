@@ -12,30 +12,10 @@ import { themeColors } from "assets/theme/style";
 import TaskMenu from "components/TaskMenu";
 import { truncateText } from "helpers/truncateText";
 import { Divider } from "@mui/material";
-import TaskContext from "contexts/TaskContext/TaskContext";
 import TaskFilterContext from "contexts/TaskFilterContext/TaskFilterContext";
-import { ITaskType } from "utils/interfaces/task/task.interface";
 
-interface TaskListProps {
-  searchTerm: string;
-}
-
-const TaskListComponent: FC<TaskListProps> = ({ searchTerm }) => {
-  const { tasks } = useContext(TaskContext);
-  const { priorityFilter } = useContext(TaskFilterContext);
-
-  const filteredTasks: ITaskType[] = tasks.filter((task) => {
-    const matchesPriority: boolean = priorityFilter
-      ? task.priority === priorityFilter
-      : true;
-    const matchesSearchTerm: boolean =
-      searchTerm.length > 3
-        ? task.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          task.description.toLowerCase().includes(searchTerm.toLowerCase())
-        : true;
-
-    return matchesPriority && matchesSearchTerm;
-  });
+const TaskListComponent: FC = () => {
+  const { filteredTasks } = useContext(TaskFilterContext);
 
   const getPriorityColor: (priority: string | undefined) => string = (
     priority
