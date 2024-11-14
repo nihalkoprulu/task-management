@@ -109,9 +109,11 @@ The TaskContext is responsible for managing all task-related data, including add
 
 **Actions:**
 
+`loadInitialTask:` Loads sample task data if no data is available.
+
 `addTask:` Adds a new task to the tasks array.
 
-`updateTask:` Updates an existing task by its ID.
+`editTask:` Updates an existing task by its ID.
 
 `deleteTask:` Removes a task by its ID.
 
