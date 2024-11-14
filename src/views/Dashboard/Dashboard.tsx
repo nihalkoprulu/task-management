@@ -1,12 +1,12 @@
 import { FC, useContext } from "react";
-import { HomepageContainer, HomepageTitle } from "./styled";
+import { DashboardContainer, DashboardTitle } from "./styled";
 import TaskFilterComponent from "components/TaskFilterComponent";
 import TaskListComponent from "components/TaskListComponent";
 import NoData from "components/NoData";
 import AddTaskComponent from "components/AddTaskComponent";
 import TaskContext from "contexts/TaskContext/TaskContext";
 
-const Homepage: FC = () => {
+const Dashboard: FC = () => {
   const { tasks } = useContext(TaskContext);
 
   const renderView: () => JSX.Element = () => {
@@ -21,12 +21,12 @@ const Homepage: FC = () => {
   };
 
   return (
-    <HomepageContainer data-testid="homepage-container">
-      <HomepageTitle>Task Tracker</HomepageTitle>
+    <DashboardContainer data-testid="dashboard-container">
+      <DashboardTitle>Task Tracker</DashboardTitle>
       <AddTaskComponent />
       {renderView()}
-    </HomepageContainer>
+    </DashboardContainer>
   );
 };
 
-export default Homepage;
+export default Dashboard;

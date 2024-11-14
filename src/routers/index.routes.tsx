@@ -1,9 +1,9 @@
 import { Navigate } from "react-router-dom";
 import { IRoute } from "utils/interfaces/route/route.interface";
-import Homepage from "views/Homepage";
+import Dashboard from "views/Dashboard";
 
 const routes: IRoute[] = [
-  { path: "/", name: "Homepage", component: <Homepage /> },
+  { path: "/", name: "Dashboard", component: <Dashboard /> },
   {
     path: "*",
     name: "Redirect",
