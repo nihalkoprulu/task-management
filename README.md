@@ -30,9 +30,9 @@ Testing is implemented using Jest and React Testing Library. To run the tests, u
 
 `npm test`
 
-#### Code Structure & State Management
+#### Overview of The Task Management, Code Structure & State Management
 
-#### Code Structure
+#### Overview of The Task Management
 
 When you run the app, you will see the Dashboard. If there are no tasks yet, you can:
 
@@ -56,6 +56,45 @@ To edit or delete a task, click the three dots at the top right of the task card
 
 If you choose Delete, an alert dialog will appear to confirm the action. If confirmed, the task will be deleted.
 
+#### Code Structure
+
+`App.tsx`
+
+It renders core components and wraps the app in various context providers for state management.
+
+`components/`
+
+Contains all reusable UI components, such as common, any task-related components.
+
+`contexts/`
+
+Holds context files that manage and provide state to the components.
+
+`views/`
+
+Contains the main views that structure the app.
+
+`utils/`
+
+Contains utility functions and TypeScript interfaces.
+
+`assets/`
+
+Stores static assets, such as global styles, theme definitions, and images. This can include CSS or styled-components files, icons, and other design assets.
+
+`routers/`
+
+Manages routing for the app, defining the navigation structure and paths for each view.
+
+`helpers/`
+
+Holds helper functions that are used throughout the app. 
+
+`lib/`
+
+Contains mock data for testing and initial task data.
+
+
 #### State Management
 
 State is managed using Context API. There are two main contexts: TaskContext and FilterContext.
@@ -66,7 +105,7 @@ The TaskContext is responsible for managing all task-related data, including add
 
 **State:**
 
-tasks: An array of task objects. Each task object includes properties such as id, title, description, priority.
+`tasks:` An array of task objects. Each task object includes properties such as id, title, description, priority.
 
 **Actions:**
 
