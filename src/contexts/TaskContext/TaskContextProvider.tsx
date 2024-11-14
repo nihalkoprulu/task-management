@@ -12,14 +12,18 @@ const TaskContextProvider = ({ children }: { children: React.ReactNode }) => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
-  const loadInitialTask = (tasks: ITaskType[]) => setTasks(tasks);
-  const addTask = (task: ITaskType) => setTasks((prev) => [...prev, task]);
-  const editTask = (updatedTask: ITaskType) => {
+  const loadInitialTask: (tasks: ITaskType[]) => void = (tasks) =>
+    setTasks(tasks);
+
+  const addTask: (task: ITaskType) => void = (task) =>
+    setTasks((prev) => [...prev, task]);
+
+  const editTask: (updatedTask: ITaskType) => void = (updatedTask) => {
     setTasks((prev) =>
       prev.map((task) => (task.id === updatedTask.id ? updatedTask : task))
     );
   };
-  const deleteTask = (id: number) =>
+  const deleteTask: (id: number) => void = (id) =>
     setTasks((prev) => prev.filter((task) => task.id !== id));
 
   return (

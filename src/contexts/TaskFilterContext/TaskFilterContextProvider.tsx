@@ -21,20 +21,23 @@ const TaskFilterContextProvider = ({
     localStorage.setItem("priorityFilter", priorityFilter);
   }, [priorityFilter]);
 
-  const filterTasks = useCallback((): ITaskType[] => {
-    return tasks.filter((task) => {
-      const matchesPriority: boolean = priorityFilter
-        ? task.priority === priorityFilter
-        : true;
-      const matchesSearchTerm: boolean =
-        searchTerm.length > 3
-          ? task.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            task.description.toLowerCase().includes(searchTerm.toLowerCase())
+  const filterTasks: () => ITaskType[] = useCallback(
+    () =>
+      tasks.filter((task) => {
+        const matchesPriority: boolean = priorityFilter
+          ? task.priority === priorityFilter
           : true;
 
-      return matchesPriority && matchesSearchTerm;
-    });
-  }, [tasks, searchTerm, priorityFilter]);
+        const matchesSearchTerm: boolean =
+          searchTerm.length > 3
+            ? task.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+              task.description.toLowerCase().includes(searchTerm.toLowerCase())
+            : true;
+
+        return matchesPriority && matchesSearchTerm;
+      }),
+    [tasks, priorityFilter, searchTerm]
+  );
 
   const filteredTasks: ITaskType[] = filterTasks();
 
